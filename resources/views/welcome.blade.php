@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>ESG Application Portal</title>
+    <title>Bazooka</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
@@ -30,7 +30,7 @@
 <body id="page-top">
     <header class="masthead d-flex align-items-center">
         <div class="container px-4 px-lg-5 text-center">
-            <img src="{{asset('images/Background.png')}}" class="col-6 mt-3">
+            <img src="{{asset('images/Background.png')}}" class="col-6 mt-5">
             <h1 class="mt-3 mb-4">Cafe And Playstation Management System</h1>
 
 
