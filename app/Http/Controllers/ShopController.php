@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Shop;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
 {
@@ -36,7 +37,17 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|min:3|max:250',
+            'address' => 'nullable|min:3|max:250',
+        ]);
+
+        $shop = new Shop();
+        $shop->owner_id = Auth::user()->id;
+        $shop->name = $request->name;
+        $shop->address = $request->address ? $request->address : null;
+        $shop->save();
+        return redirect()->route('home');
     }
 
     /**

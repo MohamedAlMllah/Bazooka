@@ -8,9 +8,28 @@
                 <div class="card-header">New Shop</div>
 
                 <div class="card-body">
-                
+                    <form action="{{ route('shops.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <h5 class="mb-1">Shop Name</h5>
+                        <div class="form-group">
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Enter Shop Name" value="{{old('name')}}" name="name">
+                        </div>
+                        @error('name')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
 
-                    
+                        <h5 class="mb-1 mt-3">Shop Address</h5>
+                        <div class="form-group">
+                            <input type="text" class="form-control @error('address') is-invalid @enderror" placeholder="Enter Shop Address" value="{{old('address')}}" name="address">
+                        </div>
+                        @error('address')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+
+                        <div class="form-group text-center mt-3">
+                            <button type="submit" class="btn btn-outline-success" style="width: 40%">Create</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

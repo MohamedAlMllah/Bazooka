@@ -8,15 +8,9 @@
                 <div class="card-header">Welcome to Bazooka</div>
 
                 <div class="card-body">
-                    <div class="text-right mb-5">
-                        <a class="btn btn-outline-primary mt-3" href="{{ route('shops.create') }}">
-                            New Shop
-                        </a>
-                        
-                       
-                    </div>
-
-                    
+                    @can('isOwner')
+                    @include('home.owner')
+                    @endcan
                 </div>
             </div>
         </div>
