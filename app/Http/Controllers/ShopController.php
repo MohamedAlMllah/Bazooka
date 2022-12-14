@@ -69,7 +69,7 @@ class ShopController extends Controller
      */
     public function edit(Shop $shop)
     {
-        //
+        return View('shops.edit', ['shop' => $shop, 'shopTables' => $shop->tables]);        
     }
 
     /**
