@@ -5,11 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Shop extends Model
+class Table extends Model
 {
     use HasFactory;
-    public function tables()
-    {
-        return $this->hasMany(Table::class, 'shop_id');
-    }
 }
