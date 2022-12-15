@@ -81,7 +81,15 @@ class ShopController extends Controller
      */
     public function update(Request $request, Shop $shop)
     {
-        //
+        $request->validate([
+            'name' => 'required|min:3|max:250',
+            'address' => 'nullable|min:3|max:250',
+        ]);
+
+        $shop->name = $request->name;
+        $shop->address = $request->address ? $request->address : null;
+        $shop->save();
+        return redirect()->route('shops.edit', $shop->id);
     }
 
     /**

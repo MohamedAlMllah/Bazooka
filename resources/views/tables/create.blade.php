@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <form action="{{ route('shops.tables.store', [$shop->id]) }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <h5 class="mb-1">Table Name / ID</h5>
+                        <h5 class="mb-1">Name / ID</h5>
                         <div class="form-group">
                             <input type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Enter Table Name / ID" value="{{old('name')}}" name="name">
                         </div>
