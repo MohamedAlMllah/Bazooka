@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <form action="{{ route('shops.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <h5 class="mb-1">Shop Name</h5>
+                        <h5 class="mb-1">Name</h5>
                         <div class="form-group">
                             <input type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Enter Shop Name" value="{{old('name')}}" name="name">
                         </div>
@@ -18,7 +18,7 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
 
-                        <h5 class="mb-1 mt-3">Shop Address</h5>
+                        <h5 class="mb-1 mt-3">Address</h5>
                         <div class="form-group">
                             <input type="text" class="form-control @error('address') is-invalid @enderror" placeholder="Enter Shop Address" value="{{old('address')}}" name="address">
                         </div>
