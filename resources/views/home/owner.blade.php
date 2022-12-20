@@ -6,7 +6,7 @@
 
 @if($shops->count())
 <h1 class="text-center mb-5">My Shops</h1>
-<table class="table">
+<table class="table text-center">
     <thead>
         <tr>
             <th scope="col">#</th>
