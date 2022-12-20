@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Shop;
 use App\Http\Controllers\Controller;
+use App\Models\Employment;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -69,7 +71,7 @@ class ShopController extends Controller
      */
     public function edit(Shop $shop)
     {
-        return View('shops.edit', ['shop' => $shop, 'shopTables' => $shop->tables]);        
+        return View('shops.edit', ['shop' => $shop, 'shopTables' => $shop->tables]);
     }
 
     /**
@@ -101,5 +103,38 @@ class ShopController extends Controller
     public function destroy(Shop $shop)
     {
         //
+    }
+    public function employment(Shop $shop,)
+    {
+        $employees = $shop->employees();
+        return view('shops.employment', ['shop' => $shop, 'employees' => $employees]);
+    }
+    public function hire(Request $request, Shop $shop)
+    {
+        $employee = User::where('email', $request->email)->first() ?? null;
+        if ($employee === null)
+            return redirect()->route('employment', $shop->id)->with('error', 'User not found');
+        else if ($employee->role_id == 5 & Auth::user()->id == $shop->owner_id) {
+            $employee->role_id = 4;
+            $employee->save();
+            $employment = new Employment();
+            $employment->employee_id = $employee->id;
+            $employment->shop_id = $shop->id;
+            $employment->save();
+            return redirect()->route('employment', $shop->id);
+        } else
+            return back();
+    }
+    public function fire(Shop $shop, User $user)
+    {
+        $employee = User::where('email', $user->email)->firstOrFail();
+        if ($employee->role_id == 4 & Auth::user()->id == $shop->owner_id) {
+            $employee->role_id = 5;
+            $employee->save();
+            $employment = Employment::where('employee_id', $employee->id)->firstOrFail();
+            $employment->delete();
+            return redirect()->route('employment', $shop->id);
+        } else
+            return back();
     }
 }

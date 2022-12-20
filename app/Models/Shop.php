@@ -12,4 +12,17 @@ class Shop extends Model
     {
         return $this->hasMany(Table::class, 'shop_id');
     }
+    public function employments()
+    {
+        return $this->hasMany(Employment::class, 'shop_id');
+    }
+    public function employees()
+    {
+        $employments = $this->employments;
+        $employees = collect();
+        foreach ($employments as $employment) {
+            $employees->push($employment->employee);
+        }
+        return $employees;
+    }
 }
