@@ -43,7 +43,7 @@
 
           <div class="text-center mb-3">
             <div class="btn-group">
-              <a class="btn btn-outline-success mt-3" href="#">
+              <a class="btn btn-outline-success mt-3" href="{{ route('shops.categories.index', [$shop->id]) }}">
                 Menu
               </a>
               <a class="btn btn-outline-warning mt-3" href="{{ route('employment', [$shop->id]) }}">

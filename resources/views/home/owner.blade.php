@@ -23,12 +23,14 @@
             <td>{{ $shop->name }}</td>
             <td>{{ $shop->address }}</td>
             <td>
-                <a class="btn btn-outline-secondary" href="{{ route('shops.edit', [$shop->id]) }}">
-                    Edit
-                </a>
-                <a class="btn btn-outline-primary" href="#">
-                    Show
-                </a>
+                <div class="btn-group">
+                    <a class="btn btn-outline-success" href="{{ route('shops.edit', [$shop->id]) }}">
+                        Manage
+                    </a>
+                    <a class="btn btn-outline-primary" href="#">
+                        Show
+                    </a>
+                </div>
             </td>
         </tr>
         @endforeach
