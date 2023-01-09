@@ -16,9 +16,9 @@ class CreateEmploymentsTable extends Migration
         Schema::create('employments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('shop_id');
-            $table->foreign('shop_id')->references('id')->on('shops');
+            $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
             $table->unsignedBigInteger('employee_id');
-            $table->foreign('employee_id')->references('id')->on('users');
+            $table->foreign('employee_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
