@@ -25,4 +25,19 @@ class Shop extends Model
         }
         return $employees;
     }
+    public function categories()
+    {
+        return $this->hasMany(Category::class, 'shop_id');
+    }
+    public function items()
+    {
+        $items = collect();
+        foreach ($this->categories as $category) {
+            $itemsOfCategory = $category->items;
+            foreach ($itemsOfCategory as $item) {
+                $items->push($item);
+            }
+        }
+        return $items;
+    }
 }

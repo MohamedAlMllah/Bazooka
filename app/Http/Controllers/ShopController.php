@@ -113,8 +113,10 @@ class ShopController extends Controller
     {
         $employee = User::where('email', $request->email)->first() ?? null;
         if ($employee === null)
-            return redirect()->route('employment', $shop->id)->with('error', 'User not found');
-        else if ($employee->role_id == 5 & Auth::user()->id == $shop->owner_id) {
+            return redirect()->route('employment', $shop->id)->with('error', 'User Not Found');
+        else if ($employee->role_id == 4)
+            return redirect()->route('employment', $shop->id)->with('error', 'This Employee Is Already Employed');
+        else if (Auth::user()->id == $shop->owner_id) {
             $employee->role_id = 4;
             $employee->save();
             $employment = new Employment();
@@ -123,7 +125,7 @@ class ShopController extends Controller
             $employment->save();
             return redirect()->route('employment', $shop->id);
         } else
-            return back();
+            return back()->with('error', 'Somthing Went Wrong');
     }
     public function fire(Shop $shop, User $user)
     {
@@ -136,5 +138,11 @@ class ShopController extends Controller
             return redirect()->route('employment', $shop->id);
         } else
             return back();
+    }
+
+    public function menu(Shop $shop,)
+    {
+        $categories = $shop->categories;
+        return view('shops.menu', ['shop' => $shop, 'categories' => $categories]);
     }
 }

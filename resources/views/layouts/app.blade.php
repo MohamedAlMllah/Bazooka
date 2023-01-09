@@ -7,7 +7,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <link rel="icon" href="{{asset('images/Logo.png')}}" type="image/icon type">
     <title>{{ config('app.name', 'Bazooka') }}</title>
 
     <!-- Scripts -->

@@ -12,6 +12,10 @@
                         {{ session('error') }}
                     </div>
                     @endif
+                    <div class="text-start mb-3">
+                        <a href="{{ route('shops.edit', [$shop->id]) }}" class="btn btn-outline-secondary">Shop Managment</a>
+                    </div>
+
                     <form action="{{ route('hire', [$shop->id]) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <h5 class="mb-1">Search For User</h5>

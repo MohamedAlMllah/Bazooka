@@ -26,6 +26,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/shops/{shop}/employment', [App\Http\Controllers\ShopController::class, 'employment'])->name('employment');
 Route::post('/shops/{shop}/hire', [App\Http\Controllers\ShopController::class, 'hire'])->name('hire');
 Route::post('/shops/{shop}/users/{user}/fire', [App\Http\Controllers\ShopController::class, 'fire'])->name('fire');
+Route::get('/shops/{shop}/menu', [App\Http\Controllers\ShopController::class, 'menu'])->name('menu');
 
 Route::resource('shops', 'App\Http\Controllers\ShopController')->middleware('can:isOwner');
 Route::resource('shops.tables', 'App\Http\Controllers\TableController')->middleware('can:isOwner');
+Route::resource('shops.categories', 'App\Http\Controllers\CategoryController')->middleware('can:isOwner');
+Route::resource('shops.categories.items', 'App\Http\Controllers\ItemController')->middleware('can:isOwner');
