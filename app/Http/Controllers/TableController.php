@@ -85,12 +85,20 @@ class TableController extends Controller
         $request->validate([
             'name' => 'required|min:3|max:250',
             'type' => 'required|in:table,pc,ps',
-            'description' => 'nullable|min:2|max:250'
+            'description' => 'nullable|min:2|max:250',
+            'singlePrice' => 'required_unless:type,table|min:0|max:10000',
+            'multiplayerPrice' => 'required_if:type,ps|min:0|max:10000',
         ]);
 
+        return '555';
         $table->name = $request->name;
         $table->type = $request->type;
-        $table->description = $request->description ? $request->description : null;
+        if (!$request->singlePrice)
+            $table->description = $request->description ? $request->description : null;
+        if (!$request->name) {
+            $table->singlePrice = $request->singlePrice ? $request->singlePrice : null;
+            $table->multiplayerPrice = $request->multiplayerPrice ? $request->multiplayerPrice : null;
+        }
         $table->save();
         return redirect()->route('shops.edit', $shop->id);
     }
@@ -105,5 +113,9 @@ class TableController extends Controller
     {
         $table->delete();
         return redirect()->route('shops.edit', $shop->id);
+    }
+    public function pricing(Shop $shop, Table $table)
+    {
+        return View('tables.pricing', ['shop' => $shop, 'table' => $table]);
     }
 }

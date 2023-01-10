@@ -69,7 +69,7 @@
                   <div class="card-footer bg-white d-flex">
                     <a href="{{ route('shops.tables.edit', [$shop->id, $table->id]) }}" class="card-link">Edit</a>
                     @if($table->type != 'table')
-                    <a href="#" class="card-link">Price</a>
+                    <a href="{{ route('pricing', [$shop->id, $table->id]) }}" class="card-link">Price</a>
                     @endif
                     <a href="{{ route('shops.tables.destroy', [$shop->id, $table->id]) }}" onclick="$('#formDelete').attr('action', this.href)" type="button" class="card-link link-danger border border-0 bg-white mr-n3" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
                   </div>

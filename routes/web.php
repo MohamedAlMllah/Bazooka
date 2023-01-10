@@ -23,6 +23,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/shops/{shop}/tables/{table}/pricing', [App\Http\Controllers\TableController::class, 'pricing'])->name('pricing');
 Route::get('/shops/{shop}/employment', [App\Http\Controllers\ShopController::class, 'employment'])->name('employment');
 Route::post('/shops/{shop}/hire', [App\Http\Controllers\ShopController::class, 'hire'])->name('hire');
 Route::post('/shops/{shop}/users/{user}/fire', [App\Http\Controllers\ShopController::class, 'fire'])->name('fire');
