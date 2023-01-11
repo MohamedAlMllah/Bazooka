@@ -115,10 +115,10 @@ class TableController extends Controller
     {
         $request->validate([
             'singlePrice' => 'required|min:0|max:10000',
-            'multiplayerPrice' => 'required_if:type,ps|min:0|max:10000'
+            'multiplayerPrice' => 'required_if:type,playstation|min:0|max:10000'
         ]);
 
-        $table->single_price = $request->singlePrice ? $request->singlePrice : 0.0;
+        $table->single_price = $request->singlePrice;
         $table->multiplayer_price = $request->multiplayerPrice ? $request->multiplayerPrice : 0.0;
         $table->save();
         return redirect()->route('shops.edit', $shop->id);
