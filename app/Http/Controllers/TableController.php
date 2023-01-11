@@ -38,7 +38,7 @@ class TableController extends Controller
     {
         $request->validate([
             'name' => 'required|min:3|max:250',
-            'type' => 'required|in:table,pc,ps',
+            'type' => 'required|in:table,computer,playstation',
             'description' => 'nullable|min:2|max:250'
         ]);
 
@@ -84,7 +84,7 @@ class TableController extends Controller
     {
         $request->validate([
             'name' => 'required|min:3|max:250',
-            'type' => 'required|in:table,pc,ps',
+            'type' => 'required|in:table,computer,playstation',
             'description' => 'nullable|min:2|max:250'
         ]);
 
@@ -104,6 +104,23 @@ class TableController extends Controller
     public function destroy(Shop $shop, Table $table)
     {
         $table->delete();
+        return redirect()->route('shops.edit', $shop->id);
+    }
+
+    public function pricing(Shop $shop, Table $table)
+    {
+        return View('tables.pricing', ['shop' => $shop, 'table' => $table]);
+    }
+    public function updatePricing(Request $request, Shop $shop, Table $table)
+    {
+        $request->validate([
+            'singlePrice' => 'required|min:0|max:10000',
+            'multiplayerPrice' => 'required_if:type,playstation|min:0|max:10000'
+        ]);
+
+        $table->single_price = $request->singlePrice;
+        $table->multiplayer_price = $request->multiplayerPrice ? $request->multiplayerPrice : 0.0;
+        $table->save();
         return redirect()->route('shops.edit', $shop->id);
     }
 }

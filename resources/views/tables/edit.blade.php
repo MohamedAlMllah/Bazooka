@@ -23,20 +23,20 @@
                         <div class="form-group">
                             <select class="form-control @error('type') is-invalid @enderror" value="{{old('type')}}" name="type">
                                 <option value="table" {{ $table->type == "table" ? 'selected' : '' }}>Table</option>
-                                <option value="pc" {{ $table->type == "pc" ? 'selected' : '' }}>Personal Computer (PC)</option>
-                                <option value="ps" {{ $table->type == "ps" ? 'selected' : '' }}>Playstation (PS)</option>
+                                <option value="computer" {{ $table->type == "computer" ? 'selected' : '' }}>Personal Computer (PC)</option>
+                                <option value="playstation" {{ $table->type == "playstation" ? 'selected' : '' }}>Playstation (PS)</option>
                             </select>
                         </div>
                         @error('type')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-                        
+
                         <h5 class="mb-1 mt-3">Description</h5>
                         <div class="form-group">
                             <textarea class="form-control @error('description') is-invalid @enderror" rows="2" placeholder="Enter description (Optional)" name="description">{{old('description') ?? $table->description ?? ''}}</textarea>
                         </div>
                         @error('description')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                        <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
 
                         <div class="form-group text-center mt-5">
