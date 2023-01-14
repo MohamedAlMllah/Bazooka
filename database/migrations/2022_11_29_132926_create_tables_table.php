@@ -20,8 +20,8 @@ class CreateTablesTable extends Migration
             $table->string('name');
             $table->enum('type', ['table', 'computer', 'playstation']);
             $table->longText('description')->nullable();
-            $table->double('single_price', 8, 2)->default('0');
-            $table->double('multiplayer_price', 8, 2)->default('0');
+            $table->double('single_price', 8, 2)->default('0.00');
+            $table->double('multiplayer_price', 8, 2)->default('0.00');
             $table->timestamps();
         });
     }

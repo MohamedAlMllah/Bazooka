@@ -37,6 +37,18 @@
                                 <td>
                                     {{ $category->name }}
 
+
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="{{ route('shops.categories.items.index', [$shop->id, $category->id]) }}" class="btn btn-outline-primary">Items</a>
+                                        <a class="btn btn-outline-secondary" data-bs-toggle="collapse" href="#collapseEdit{{$category->id}}" role="button" aria-expanded="false" aria-controls="collapseEdit{{$category->id}}">Edit</a>
+                                        <a href="{{ route('shops.categories.destroy', [$shop->id, $category->id]) }}" onclick="$('#formDelete').attr('action', this.href)" type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="border-0" colspan="4">
                                     <div class="collapse" id="collapseEdit{{$category->id}}">
                                         <div class="card card-body">
                                             <form id="formEdit" action="{{ route('shops.categories.update', [$shop->id, $category->id]) }}" method="POST" enctype="multipart/form-data">
@@ -59,13 +71,6 @@
                                                 </div>
                                             </form>
                                         </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="btn-group">
-                                        <a href="{{ route('shops.categories.items.index', [$shop->id, $category->id]) }}" class="btn btn-outline-primary">Items</a>
-                                        <a class="btn btn-outline-secondary" data-bs-toggle="collapse" href="#collapseEdit{{$category->id}}" role="button" aria-expanded="false" aria-controls="collapseEdit{{$category->id}}">Edit</a>
-                                        <a href="{{ route('shops.categories.destroy', [$shop->id, $category->id]) }}" onclick="$('#formDelete').attr('action', this.href)" type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
                                     </div>
                                 </td>
                             </tr>

@@ -28,24 +28,24 @@
 </head>
 
 <body id="page-top">
-    <header class="masthead d-flex align-items-center">
-        <div class="container px-4 px-lg-5 text-center">
+    <header class="masthead d-flex aligns-items-center justify-content-center">
+        <div class="container px-4 px-lg-5 text-center aligns-items-center">
             <img src="{{asset('images/Background.png')}}" class="col-6 mt-5">
             <h1 class="mt-3 mb-4">Cafe And Playstation Management System</h1>
 
 
             @if (Route::has('login'))
             @auth
-            <a href="{{ route('home') }}" style="width: 25%" class="btn btn-primary">
+            <a href="{{ route('home') }}" class="btn btn-primary col-md-3 col-5">
                 <h3> Dashboard </h3>
             </a>
             @else
-            <a href="{{ route('login') }}" style="width: 25%" class="btn btn-success pr-3">
+            <a href="{{ route('login') }}" class="btn btn-success col-md-3 col-5 pr-3">
                 <h3> Log in </h3>
             </a>
             &nbsp;&nbsp;&nbsp;&nbsp;
             @if (Route::has('register'))
-            <a href="{{ route('register') }}" style="width: 25%" class="btn btn-primary">
+            <a href="{{ route('register') }}" class="btn btn-primary col-md-3 col-5">
                 <h3> Register </h3>
             </a>
             @endif
