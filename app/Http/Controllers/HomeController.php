@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Shop;
+use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -24,7 +27,26 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $shops = Auth::user()->shops;
+        if (Gate::allows('isOwner')) {
+            $shops = Auth::user()->shops;
+            if ($shops->count() == 1)
+                return redirect()->route('shops.edit', $shops->first()->id);
+        } else {
+            $shops = Shop::all();
+        }
         return view('home', ['shops' => $shops]);
+    }
+
+    public function usersManagment()
+    {
+        return view('admin.usersManagment');
+    }
+    public function findUser(Request $request)
+    {
+        $owner = User::where('email', $request->email)->first() ?? null;
+        if ($owner === null)
+            return redirect()->route('usersManagment')->with('error', 'User Not Found');
+        else
+            return redirect()->route('shops.create')->with('ownerId', $owner->id);
     }
 }

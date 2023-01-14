@@ -1,9 +1,3 @@
-<div class="text-end mb-5">
-    <a class="btn btn-outline-primary mt-3" href="{{ route('shops.create') }}">
-        New Shop
-    </a>
-</div>
-
 @if($shops->count())
 <h1 class="text-center mb-5">My Shops</h1>
 <table class="table text-center">

@@ -10,6 +10,8 @@
                 <div class="card-body">
                     @can('isOwner')
                     @include('home.owner')
+                    @elsecan('isAdmin')
+                    @include('home.admin')
                     @endcan
                 </div>
             </div>

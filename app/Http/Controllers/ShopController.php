@@ -45,10 +45,13 @@ class ShopController extends Controller
         ]);
 
         $shop = new Shop();
-        $shop->owner_id = Auth::user()->id;
+        $shop->owner_id = $request->ownerId;
         $shop->name = $request->name;
         $shop->address = $request->address ? $request->address : null;
         $shop->save();
+        $user = User::where('id', $request->ownerId)->first();
+        $user->role_id = 3;
+        $user->save();
         return redirect()->route('home');
     }
 
@@ -102,7 +105,8 @@ class ShopController extends Controller
      */
     public function destroy(Shop $shop)
     {
-        //
+        $shop->delete();
+        return redirect()->route('home');
     }
     public function employment(Shop $shop,)
     {

@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Shop extends Model
 {
     use HasFactory;
+    public function owner()
+    {
+        return $this->belongsTo(User::class);
+    }
     public function tables()
     {
         return $this->hasMany(Table::class, 'shop_id');
