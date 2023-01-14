@@ -10,6 +10,7 @@
                 <div class="card-body">
                     <form action="{{ route('shops.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        <input type="hidden" value="{{ session('ownerId') }}" name="ownerId">
                         <h5 class="mb-1">Name</h5>
                         <div class="form-group">
                             <input type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Enter Shop Name" value="{{old('name')}}" name="name">
