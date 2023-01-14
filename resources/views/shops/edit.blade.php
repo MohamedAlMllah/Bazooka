@@ -58,7 +58,7 @@
           @if($shopTables->count())
           <h3 class="text-center mb-1">All Tables</h3>
           <div class="container text-center">
-            <div class="row row-cols-3">
+            <div class="row row-cols-lg-3 row-cols-sm-2">
               @foreach ($shopTables as $table)
               <div class="mt-4">
                 <div class="card h-100">

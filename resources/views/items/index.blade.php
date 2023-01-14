@@ -13,7 +13,7 @@
                     </div>
                     <form action="{{ route('shops.categories.items.store', [$shop->id,$category->id]) }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <div class="row">
+                        <div class="row gx-2">
                             <div class="col-3">
                                 <h5 class="mb-1">Name</h5>
                                 <div class="form-group">
@@ -23,7 +23,7 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="col-3">
+                            <div class="col-4">
                                 <h5 class="mb-1">Price</h5>
                                 <div class="form-group input-group">
                                     <input type="number" min="0.00" max="10000.00" step="0.25" class="form-control @error('price') is-invalid @enderror" value="{{old('price') ?? '0.0'}}" name="price">
@@ -36,7 +36,7 @@
                                 @enderror
 
                             </div>
-                            <div class="col-6">
+                            <div class="col-5">
                                 <h5 class="mb-1">Description</h5>
                                 <div class="form-group">
                                     <textarea class="form-control @error('description') is-invalid @enderror" rows="1" placeholder="Enter description (Optional)" name="description">{{old('description')}}</textarea>
