@@ -79,7 +79,7 @@
             </div>
           </div>
           <div class="text-center mt-3">
-            <a class="btn btn-outline-secondary mt-3" href="#">
+            <a class="btn btn-outline-secondary mt-3" href="{{ route('shops.show', [$shop->id]) }}">
               View As Employee
             </a>
           </div>

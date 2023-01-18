@@ -50,4 +50,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Shop::class, 'owner_id');
     }
+    public function employment()
+    {
+        return $this->hasOne(Employment::class, 'employee_id');
+    }
 }

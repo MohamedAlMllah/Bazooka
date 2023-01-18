@@ -27,14 +27,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (Gate::allows('isOwner')) {
+        if (Gate::allows('isAdmin')) {
+            $shops = Shop::all();
+        } elseif (Gate::allows('isOwner')) {
             $shops = Auth::user()->shops;
             if ($shops->count() == 1)
                 return redirect()->route('shops.edit', $shops->first()->id);
-        } else {
-            $shops = Shop::all();
+        } elseif (Gate::allows('isEmployee')) {
+            $employedAtShop = Auth::user()->employment->shop;
         }
-        return view('home', ['shops' => $shops]);
+        return view('home', [
+            'shops' => $shops ?? null,
+            'employedAtShop' => $employedAtShop ?? null
+        ]);
     }
 
     public function usersManagment()

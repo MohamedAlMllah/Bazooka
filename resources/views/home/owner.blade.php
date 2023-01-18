@@ -21,7 +21,7 @@
                     <a class="btn btn-outline-success" href="{{ route('shops.edit', [$shop->id]) }}">
                         Manage
                     </a>
-                    <a class="btn btn-outline-primary" href="#">
+                    <a class="btn btn-outline-primary" href="{{ route('shops.show', [$shop->id]) }}">
                         Show
                     </a>
                 </div>

@@ -8,10 +8,12 @@
                 <div class="card-header">Welcome to Bazooka</div>
 
                 <div class="card-body">
-                    @can('isOwner')
-                    @include('home.owner')
-                    @elsecan('isAdmin')
+                    @can('isAdmin')
                     @include('home.admin')
+                    @elsecan('isOwner')
+                    @include('home.owner')
+                    @elsecan('isEmployee')
+                    @include('home.employee')
                     @endcan
                 </div>
             </div>
