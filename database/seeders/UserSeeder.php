@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
             'name' => 'employee',
             'email' => 'employee@gmail.com',
             'password' => bcrypt('123456789'),
-            'role_id' => 5,
+            'role_id' => 4,
         ]);
         User::create([
             'name' => 'employee2',

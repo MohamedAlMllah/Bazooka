@@ -63,7 +63,7 @@ class ShopController extends Controller
      */
     public function show(Shop $shop)
     {
-        //
+        return View('home.employee', ['employedAtShop' => $shop]);
     }
 
     /**
