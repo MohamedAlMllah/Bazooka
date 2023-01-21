@@ -24,7 +24,7 @@
                                         <p class="card-text">{{$table->description}}</p>
                                     </div>
                                     <div class="card-footer bg-white text-center">
-                                        <a href="#" class="card-link">Details</a>
+                                        <a href="{{ route('orderCheck', [$table->id]) }}" class="card-link">Details</a>
                                     </div>
                                 </div>
                             </div>

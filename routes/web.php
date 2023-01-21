@@ -24,18 +24,24 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/shops/{shop}/tables/{table}/pricing', [App\Http\Controllers\TableController::class, 'pricing'])->name('pricing');
-Route::post('/shops/{shop}/tables/{table}/pricing', [App\Http\Controllers\TableController::class, 'updatePricing'])->name('updatePricing');
-Route::get('/shops/{shop}/employment', [App\Http\Controllers\ShopController::class, 'employment'])->name('employment');
-Route::post('/shops/{shop}/hire', [App\Http\Controllers\ShopController::class, 'hire'])->name('hire');
-Route::post('/shops/{shop}/users/{user}/fire', [App\Http\Controllers\ShopController::class, 'fire'])->name('fire');
-Route::get('/shops/{shop}/menu', [App\Http\Controllers\ShopController::class, 'menu'])->name('menu');
+Route::get('/tables/{table}/management', [App\Http\Controllers\TableController::class, 'management'])->name('management')->middleware('can:isOwnerOrEmployee');
+Route::get('/tables/{table}/order-check', [App\Http\Controllers\TableController::class, 'orderCheck'])->name('orderCheck')->middleware('can:isOwnerOrEmployee');
+Route::get('/tables/{table}/items-list', [App\Http\Controllers\TableController::class, 'itemsList'])->name('itemsList')->middleware('can:isOwnerOrEmployee');
+Route::get('/tables/{table}/send-order-items', [App\Http\Controllers\OrderItemController::class, 'sendOrderItems'])->name('sendOrderItems')->middleware('can:isOwnerOrEmployee');
 
-Route::get('/users-managment', [App\Http\Controllers\HomeController::class, 'usersManagment'])->name('usersManagment');
-Route::post('/find-user', [App\Http\Controllers\HomeController::class, 'findUser'])->name('findUser');
+Route::get('/shops/{shop}/tables/{table}/pricing', [App\Http\Controllers\TableController::class, 'pricing'])->name('pricing')->middleware('can:isOwner');
+Route::post('/shops/{shop}/tables/{table}/pricing', [App\Http\Controllers\TableController::class, 'updatePricing'])->name('updatePricing')->middleware('can:isOwner');
+Route::get('/shops/{shop}/employment', [App\Http\Controllers\ShopController::class, 'employment'])->name('employment')->middleware('can:isOwner');
+Route::post('/shops/{shop}/hire', [App\Http\Controllers\ShopController::class, 'hire'])->name('hire')->middleware('can:isOwner');
+Route::post('/shops/{shop}/users/{user}/fire', [App\Http\Controllers\ShopController::class, 'fire'])->name('fire')->middleware('can:isOwner');
+Route::get('/shops/{shop}/menu', [App\Http\Controllers\ShopController::class, 'menu'])->name('menu')->middleware('can:isOwner');
+
+Route::get('/users-managment', [App\Http\Controllers\HomeController::class, 'usersManagment'])->name('usersManagment')->middleware('can:isAdmin');
+Route::post('/find-user', [App\Http\Controllers\HomeController::class, 'findUser'])->name('findUser')->middleware('can:isAdmin');
 
 Route::resource('shops', 'App\Http\Controllers\ShopController')->only(['edit', 'update', 'show'])->middleware('can:isOwner');
 Route::resource('shops', 'App\Http\Controllers\ShopController')->only(['create', 'store', 'destroy'])->middleware('can:isAdmin');
 Route::resource('shops.tables', 'App\Http\Controllers\TableController')->middleware('can:isOwner');
 Route::resource('shops.categories', 'App\Http\Controllers\CategoryController')->middleware('can:isOwner');
 Route::resource('shops.categories.items', 'App\Http\Controllers\ItemController')->middleware('can:isOwner');
+Route::resource('tables.items.orderItems', 'App\Http\Controllers\OrderItemController')->middleware('can:isOwnerOrEmployee');
