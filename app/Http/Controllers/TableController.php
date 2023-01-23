@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Shop;
 use App\Models\Table;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TableController extends Controller
 {
@@ -122,5 +124,28 @@ class TableController extends Controller
         $table->multiplayer_price = $request->multiplayerPrice ? $request->multiplayerPrice : 0.0;
         $table->save();
         return redirect()->route('shops.edit', $shop->id);
+    }
+
+    public function management(Table $table)
+    {
+        $currentOrder = $table->currentOrder();
+        return View('tables.management', ['table' => $table, 'currentOrder' => $currentOrder]);
+    }
+    public function orderCheck(Table $table)
+    {
+        $currentOrder = $table->currentOrder();
+        if (!$currentOrder) {
+            $order = new Order();
+            $order->ordered_by = Auth::user()->id;
+            $order->table_id = $table->id;
+            $order->save();
+        }
+        return redirect()->route('management', $table->id);
+    }
+    public function itemsList(Table $table)
+    {
+        $shop = $table->shop;
+        $categories = $shop->categories;
+        return view('tables.itemsList', ['shop' => $shop, 'table' => $table, 'categories' => $categories]);
     }
 }
