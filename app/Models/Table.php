@@ -19,6 +19,6 @@ class Table extends Model
 
     public function currentOrder()
     {
-        return $this->orders->where('is_available', true)->first();
+        return $this->orders->where('is_submitted', false)->first();
     }
 }

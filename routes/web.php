@@ -45,3 +45,4 @@ Route::resource('shops.tables', 'App\Http\Controllers\TableController')->middlew
 Route::resource('shops.categories', 'App\Http\Controllers\CategoryController')->middleware('can:isOwner');
 Route::resource('shops.categories.items', 'App\Http\Controllers\ItemController')->middleware('can:isOwner');
 Route::resource('tables.items.orderItems', 'App\Http\Controllers\OrderItemController')->middleware('can:isOwnerOrEmployee');
+Route::resource('tables.periods', 'App\Http\Controllers\PeriodController')->middleware('can:isOwnerOrEmployee');
