@@ -129,7 +129,8 @@ class TableController extends Controller
     public function management(Table $table)
     {
         $currentOrder = $table->currentOrder();
-        return View('tables.management', ['table' => $table, 'currentOrder' => $currentOrder]);
+        $currentPeriod = $currentOrder->currentPeriod();
+        return View('tables.management', ['table' => $table, 'currentOrder' => $currentOrder, 'currentPeriod' => $currentPeriod]);
     }
     public function orderCheck(Table $table)
     {

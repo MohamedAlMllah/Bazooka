@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use App\Models\Order;
 use App\Models\OrderItem;
-use App\Models\Shop;
+use Carbon;
 use App\Models\Table;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class OrderItemController extends Controller
 {
@@ -109,19 +110,27 @@ class OrderItemController extends Controller
         return redirect()->route('management', $table->id);
     }
 
-    public function sendOrderItems(Table $table)
+    public function sendOrderItems(Order $order)
     {
-        foreach ($table->currentOrder()->orderItems->where('is_sent', false) as $orderItem) {
-            $previousOrderItem = $table->currentOrder()->orderItems->where('item_id', $orderItem->item_id)->where('is_sent', true)->first();
-            if ($previousOrderItem) {
-                $previousOrderItem->quantity += $orderItem->quantity;
-                $previousOrderItem->save();
-                $orderItem->delete();
-            } else {
-                $orderItem->is_sent = true;
-                $orderItem->save();
-            }
+        $order->sendOrderItems();
+        return redirect()->route('management', $order->table_id);
+    }
+
+    public function checkout(Order $order)
+    {
+        $currentPeriod = $order->currentPeriod();
+        if ($currentPeriod) {
+            $currentPeriod->end_at = Carbon\Carbon::now();
+            $currentPeriod->save();
         }
-        return redirect()->route('management', $table->id);
+        if ($order->notSentItems()) {
+            $order->sendOrderItems();
+        }
+        $order->is_submitted = true;
+        $order->save();
+
+        if (Gate::allows('isOwner'))
+            return redirect()->route('shops.show', $order->table->shop_id);
+        return redirect()->route('home');
     }
 }

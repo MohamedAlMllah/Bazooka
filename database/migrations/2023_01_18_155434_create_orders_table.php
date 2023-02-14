@@ -19,8 +19,7 @@ class CreateOrdersTable extends Migration
             $table->foreign('ordered_by')->references('id')->on('users');
             $table->unsignedBigInteger('table_id');
             $table->foreign('table_id')->references('id')->on('tables');
-            $table->double('cash', 8, 2)->default('0');
-            $table->boolean('is_available')->default(true);
+            $table->boolean('is_submitted')->default(false);
             $table->timestamps();
         });
     }
