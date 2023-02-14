@@ -27,7 +27,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/tables/{table}/management', [App\Http\Controllers\TableController::class, 'management'])->name('management')->middleware('can:isOwnerOrEmployee');
 Route::get('/tables/{table}/order-check', [App\Http\Controllers\TableController::class, 'orderCheck'])->name('orderCheck')->middleware('can:isOwnerOrEmployee');
 Route::get('/tables/{table}/items-list', [App\Http\Controllers\TableController::class, 'itemsList'])->name('itemsList')->middleware('can:isOwnerOrEmployee');
-Route::get('/tables/{table}/send-order-items', [App\Http\Controllers\OrderItemController::class, 'sendOrderItems'])->name('sendOrderItems')->middleware('can:isOwnerOrEmployee');
+Route::get('/orders/{order}/send-order-items', [App\Http\Controllers\OrderItemController::class, 'sendOrderItems'])->name('sendOrderItems')->middleware('can:isOwnerOrEmployee');
+Route::get('/orders/{order}/checkout', [App\Http\Controllers\OrderItemController::class, 'checkout'])->name('checkout')->middleware('can:isOwnerOrEmployee');
 
 Route::get('/shops/{shop}/tables/{table}/pricing', [App\Http\Controllers\TableController::class, 'pricing'])->name('pricing')->middleware('can:isOwner');
 Route::post('/shops/{shop}/tables/{table}/pricing', [App\Http\Controllers\TableController::class, 'updatePricing'])->name('updatePricing')->middleware('can:isOwner');

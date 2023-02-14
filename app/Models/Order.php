@@ -17,6 +17,25 @@ class Order extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
+    public function notSentItems()
+    {
+        return $this->orderItems->where('is_sent', false);
+    }
+    public function sendOrderItems()
+    {
+        $orderItems = $this->orderItems;
+        foreach ($orderItems->where('is_sent', false) as $orderItem) {
+            $previousOrderItem = $orderItems->where('item_id', $orderItem->item_id)->where('is_sent', true)->first();
+            if ($previousOrderItem) {
+                $previousOrderItem->quantity += $orderItem->quantity;
+                $previousOrderItem->save();
+                $orderItem->delete();
+            } else {
+                $orderItem->is_sent = true;
+                $orderItem->save();
+            }
+        }
+    }
     public function totalCashForItems()
     {
         $orderItems = $this->orderItems;

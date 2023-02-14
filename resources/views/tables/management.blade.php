@@ -189,7 +189,7 @@
                                         <th class="border-bottom-0" colspan="2" scope="col">Total</th>
                                         <th class="border-bottom-0" scope="col">{{ $currentOrder->totalCashForItems() }}</th>
                                         <th class="border-bottom-0" scope="col">
-                                            <a class="btn btn-primary col-8" href="{{ route('sendOrderItems', [$table->id]) }}">send</a>
+                                            <a class="btn btn-success {{ $currentOrder->notSentItems()->count() ? '' : 'disabled' }} col-8" href="{{ route('sendOrderItems', [$currentOrder->id]) }}">Send</a>
                                         </th>
                                     </tr>
                                 </thead>
@@ -197,6 +197,17 @@
                             @else
                             <h5 class="mt-3">&nbsp;&nbsp;&nbsp; No Items In This Order.</h5>
                             @endif
+                        </div>
+                    </div>
+                    <div class="card col-lg-8 offset-lg-2 mt-3">
+                        <div class="card-header text-center"><b>Total</b></div>
+                        <div class="card-body row fs-3">
+                            <div class="col-8">
+                                Total: {{ $currentOrder->totalCash() }}
+                            </div>
+                            <div class="col-4">
+                                <a class="btn btn-primary col-8" href="{{ route('checkout', [$currentOrder->id]) }}">Checkout </a>
+                            </div>
                         </div>
                     </div>
                 </div>
