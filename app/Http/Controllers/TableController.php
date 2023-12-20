@@ -39,7 +39,7 @@ class TableController extends Controller
     public function store(Shop $shop, Request $request)
     {
         $request->validate([
-            'name' => 'required|min:3|max:250',
+            'name' => 'required|min:1|max:250',
             'type' => 'required|in:table,computer,playstation',
             'description' => 'nullable|min:2|max:250'
         ]);
@@ -85,7 +85,7 @@ class TableController extends Controller
     public function update(Request $request, Shop $shop, Table $table)
     {
         $request->validate([
-            'name' => 'required|min:3|max:250',
+            'name' => 'required|min:1|max:250',
             'type' => 'required|in:table,computer,playstation',
             'description' => 'nullable|min:2|max:250'
         ]);

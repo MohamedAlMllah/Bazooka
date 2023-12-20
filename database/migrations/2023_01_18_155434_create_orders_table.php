@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('ordered_by');
             $table->foreign('ordered_by')->references('id')->on('users');
             $table->unsignedBigInteger('table_id');
-            $table->foreign('table_id')->references('id')->on('tables');
+            $table->foreign('table_id')->references('id')->on('tables')->onDelete('cascade');
             $table->boolean('is_submitted')->default(false);
             $table->timestamps();
         });

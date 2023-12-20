@@ -16,7 +16,7 @@ class CreatePeriodsTable extends Migration
         Schema::create('periods', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('order_id');
-            $table->foreign('order_id')->references('id')->on('orders');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->timestamp('end_at')->default(null)->nullable();
             $table->enum('type', ['single', 'multiplayer']);
             $table->timestamps();
