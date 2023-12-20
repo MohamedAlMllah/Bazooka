@@ -40,8 +40,8 @@ Route::get('/shops/{shop}/menu', [App\Http\Controllers\ShopController::class, 'm
 Route::get('/users-managment', [App\Http\Controllers\HomeController::class, 'usersManagment'])->name('usersManagment')->middleware('can:isAdmin');
 Route::post('/find-user', [App\Http\Controllers\HomeController::class, 'findUser'])->name('findUser')->middleware('can:isAdmin');
 
-Route::resource('shops', 'App\Http\Controllers\ShopController')->only(['edit', 'update', 'show'])->middleware('can:isOwner');
 Route::resource('shops', 'App\Http\Controllers\ShopController')->only(['create', 'store', 'destroy'])->middleware('can:isAdmin');
+Route::resource('shops', 'App\Http\Controllers\ShopController')->only(['edit', 'update', 'show'])->middleware('can:isOwner');
 Route::resource('shops.tables', 'App\Http\Controllers\TableController')->middleware('can:isOwner');
 Route::resource('shops.categories', 'App\Http\Controllers\CategoryController')->middleware('can:isOwner');
 Route::resource('shops.categories.items', 'App\Http\Controllers\ItemController')->middleware('can:isOwner');

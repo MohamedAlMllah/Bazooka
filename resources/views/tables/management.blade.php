@@ -18,7 +18,11 @@
                         @endcan
                     </div>
 
-
+                    @if (session('success'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('success') }}
+                    </div>
+                    @endif
 
                     <div class="card mt-3 col-lg-8 offset-lg-2">
                         <div class="card-header text-center"><b>Time</b></div>

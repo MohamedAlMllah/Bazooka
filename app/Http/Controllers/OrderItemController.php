@@ -122,6 +122,7 @@ class OrderItemController extends Controller
         if ($currentPeriod) {
             $currentPeriod->end_at = Carbon\Carbon::now();
             $currentPeriod->save();
+            return redirect()->route('management', $order->table_id)->with('success', 'Open time was closed');
         }
         if ($order->notSentItems()) {
             $order->sendOrderItems();
